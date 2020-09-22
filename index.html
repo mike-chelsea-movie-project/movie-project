@@ -6,25 +6,43 @@
     <link rel="stylesheet" href="css/movie-project.css">
 </head>
 <body>
-<form>
-    <input id="movie-title" type="text" name="movie-title" placeholder="Movie Title">
-    <h3>Rating:</h3>
-    <label for="one">
-        <input id="one" type="radio" name="movie-rating" value="1">1
-    </label>
-    <label for="two">
-        <input id="two" type="radio" name="movie-rating" value="2">2
-    </label>
-    <label for="three">
-        <input id="three" type="radio" name="movie-rating" value="3">3
-    </label>
-    <label for="four">
-        <input id="four" type="radio" name="movie-rating" value="4">4
-    </label>
-    <label for="five">
-        <input id="five" type="radio" name="movie-rating" value="5">5
-    </label>
-</form>
+
+<!--Add Movie-->
+<div id="add-movie">
+    <h3>Add a Movie!</h3>
+    <form>
+        <input id="movie-title" type="text" name="movie-title" placeholder="Movie Title">
+        <h3>Rating:</h3>
+        <label for="one">
+            <input id="one" type="radio" name="movie-rating" value="1">1
+        </label>
+        <label for="two">
+            <input id="two" type="radio" name="movie-rating" value="2">2
+        </label>
+        <label for="three">
+            <input id="three" type="radio" name="movie-rating" value="3">3
+        </label>
+        <label for="four">
+            <input id="four" type="radio" name="movie-rating" value="4">4
+        </label>
+        <label for="five">
+            <input id="five" type="radio" name="movie-rating" value="5">5
+        </label>
+        <label for="movie-genre"><h3>Genres: </h3></label>
+        <select id="movie-genre" name="movie-genre">
+            <option disabled selected value>Select Genre</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="horror">Horror</option>
+            <option value="sci-fi">Science Fiction</option>
+            <option value="animation">Animation</option>
+            <option value="western">Western</option>
+        </select>
+        <button id="add-movie-btn">Add Movie</button>
+    </form>
+</div>
 
 <div id="loading-message"></div>
 <div id="main-display"></div>

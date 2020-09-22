@@ -26,7 +26,9 @@ $(document).ready(function () {
 
                     html += `<p>ID: ${id}</p>`+
                         `<p>Movie Title: ${title}</p>`+
-                        `<p>Movie Rating: ${rating}</p>`
+                        `<p>Movie Rating: ${rating}</p>`+
+                        `<span>Delete </span>`+
+                        `<spand>Edit </spand>`
                 })
 
                 $("#main-display").append(html);
