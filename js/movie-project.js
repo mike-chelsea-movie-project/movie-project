@@ -3,14 +3,8 @@ $(document).ready(function () {
 
     const url = "https://fearless-famous-glass.glitch.me/movies";
 
-    // GET DATA FROM MOVIE API
-    // fetch(url).then(response => response.json()).then(data => console.log(data));
-    // fetch(url).then(response => response.json())
-    //     .then(data => {
-    //         console.log(data);
-    //
     let msg = "<h1>Loading...</h1>";
-    //
+
     $('#loading-message').html(msg);
 
     $(window).load(function () {
@@ -41,6 +35,13 @@ $(document).ready(function () {
     });
 
 
+
+
+
+
+
+
+
 });
 
 // POST DATA TO MOVIE API
@@ -59,14 +60,6 @@ $(document).ready(function () {
 //     .then(response => console.log(response))
 //     .catch(error => console.error(error));
 
-//LOADING MESSAGE
-// let msg = "<h1>Loading...</h1>";
-//
-// $('#loading-message').html(msg);
-//
-// $(window).load(function() {
-//     $('#loading-message').hide();
-// });
 
-
-// });
+// GET RADIO BUTTON VALUE
+// var radioValue = $("input[name='gender']:checked").val();

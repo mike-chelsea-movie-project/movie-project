@@ -6,11 +6,32 @@
     <link rel="stylesheet" href="css/movie-project.css">
 </head>
 <body>
+<form>
+    <input id="movie-title" type="text" name="movie-title" placeholder="Movie Title">
+    <h3>Rating:</h3>
+    <label for="one">
+        <input id="one" type="radio" name="movie-rating" value="1">1
+    </label>
+    <label for="two">
+        <input id="two" type="radio" name="movie-rating" value="2">2
+    </label>
+    <label for="three">
+        <input id="three" type="radio" name="movie-rating" value="3">3
+    </label>
+    <label for="four">
+        <input id="four" type="radio" name="movie-rating" value="4">4
+    </label>
+    <label for="five">
+        <input id="five" type="radio" name="movie-rating" value="5">5
+    </label>
+</form>
+
 <div id="loading-message"></div>
 <div id="main-display"></div>
 
 
-<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+        crossorigin="anonymous"></script>
 <script src="js/movie-project.js"></script>
 </body>
 </html>
