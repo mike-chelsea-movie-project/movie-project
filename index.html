@@ -7,29 +7,52 @@
 </head>
 <body>
 
+<!--Search Movies Bar-->
+<div id="search-div">
+    <h3>Search bar: </h3>
+    <form>
+        <label for="search-movie">
+            Search Movie: <input id="search-movie" type="text" name="movie-search" placeholder="Search Movies">
+        </label>
+    </form>
+</div>
+
+<hr>
+
+<!--Sort Movies-->
+<div id="sort-div">
+    <h3>Sorting Results</h3>
+    <p>Sort via Movie Titles: </p>
+    <p>Sort via Ratings: </p>
+    <p>Sort via Genres: </p>
+</div>
+
+<hr>
+
 <!--Add Movie-->
 <div id="add-movie">
     <h3>Add a Movie!</h3>
     <form>
-        <input id="movie-title" type="text" name="movie-title" placeholder="Movie Title">
+        <h3>Movie Title:</h3>
+        <input id="movie-title-add" type="text" name="movie-title-add" placeholder="Movie Title">
         <h3>Rating:</h3>
         <label for="one">
-            <input id="one" type="radio" name="movie-rating" value="1">1
+            <input id="one" type="radio" name="movie-rating-add" value="1">1
         </label>
         <label for="two">
-            <input id="two" type="radio" name="movie-rating" value="2">2
+            <input id="two" type="radio" name="movie-rating-add" value="2">2
         </label>
         <label for="three">
-            <input id="three" type="radio" name="movie-rating" value="3">3
+            <input id="three" type="radio" name="movie-rating-add" value="3">3
         </label>
         <label for="four">
-            <input id="four" type="radio" name="movie-rating" value="4">4
+            <input id="four" type="radio" name="movie-rating-add" value="4">4
         </label>
         <label for="five">
-            <input id="five" type="radio" name="movie-rating" value="5">5
+            <input id="five" type="radio" name="movie-rating-add" value="5">5
         </label>
-        <label for="movie-genre"><h3>Genres: </h3></label>
-        <select id="movie-genre" name="movie-genre">
+        <label for="movie-genre-add"><h3>Genres: </h3></label>
+        <select id="movie-genre-add" name="movie-genre">
             <option disabled selected value>Select Genre</option>
             <option value="action">Action</option>
             <option value="comedy">Comedy</option>
@@ -44,12 +67,66 @@
     </form>
 </div>
 
+<hr>
+
+<!--Edit Movie-->
+<div id="edit-screen">
+    <h3>Edit Movie!</h3>
+    <form>
+        <h3>Movie Title:</h3>
+        <input id="movie-title-edit" type="text" name="movie-title-edit" placeholder="Movie Title">
+        <h3>Rating:</h3>
+        <label for="one-edit">
+            <input id="one-edit" type="radio" name="movie-rating-edit" value="1">1
+        </label>
+        <label for="two-edit">
+            <input id="two-edit" type="radio" name="movie-rating-edit" value="2">2
+        </label>
+        <label for="three-edit">
+            <input id="three-edit" type="radio" name="movie-rating-edit" value="3">3
+        </label>
+        <label for="four-edit">
+            <input id="four-edit" type="radio" name="movie-rating-edit" value="4">4
+        </label>
+        <label for="five-edit">
+            <input id="five-edit" type="radio" name="movie-rating-edit" value="5">5
+        </label>
+        <label for="movie-genre-edit"><h3>Genres: </h3></label>
+        <select id="movie-genre-edit" name="movie-genre">
+            <option disabled selected value>Select Genre</option>
+            <option value="action">Action</option>
+            <option value="comedy">Comedy</option>
+            <option value="drama">Drama</option>
+            <option value="fantasy">Fantasy</option>
+            <option value="horror">Horror</option>
+            <option value="sci-fi">Science Fiction</option>
+            <option value="animation">Animation</option>
+            <option value="western">Western</option>
+        </select>
+        <button id="edit-movie-btn">Edit Movie</button>
+
+    </form>
+</div>
+
+<hr>
+
+<!--Delete Movie-->
+<div id="delete-screen"></div>
+
+<!--Dynamic Loading... Screen-->
 <div id="loading-message"></div>
+
+<!--Main Movies display-->
 <div id="main-display"></div>
 
 
+<!--Source Scripts-->
+<script src="https://kit.fontawesome.com/662caa46d6.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
         crossorigin="anonymous"></script>
+
+<!--Main Javascript File-->
 <script src="js/movie-project.js"></script>
+
 </body>
 </html>

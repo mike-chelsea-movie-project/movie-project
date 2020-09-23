@@ -1,4 +1,4 @@
-"USE STRICT";
+"use strict";
 $(document).ready(function () {
 
     const url = "https://fearless-famous-glass.glitch.me/movies";
@@ -18,17 +18,19 @@ $(document).ready(function () {
                 $("#main-display").empty();
 
                 //ITERATION OF MOVIE INFORMATION
-                data.forEach(function(movie){
+                data.forEach(function (movie) {
                     console.log(movie.id);
                     let id = movie.id;
                     let title = movie.title;
-                    let rating =  movie.rating;
+                    let rating = movie.rating;
 
-                    html += `<p>ID: ${id}</p>`+
-                        `<p>Movie Title: ${title}</p>`+
-                        `<p>Movie Rating: ${rating}</p>`+
-                        `<span>Delete </span>`+
-                        `<spand>Edit </spand>`
+                    html += `<p>ID: ${id}</p>` +
+                        `<p>Movie Title: ${title}</p>` +
+                        `<p>Movie Rating: ${rating}</p>` +
+                        `<button class="delete" ><i class="fas fa-trash-alt"></i></button>` +
+                        `<span>Delete </span>` +
+                        `<button class="edit"><i class="far fa-edit"></i></button>` +
+                        `<span>Edit </span>`
                 })
 
                 $("#main-display").append(html);
@@ -36,13 +38,50 @@ $(document).ready(function () {
             })
     });
 
+    // Add Screen Functionality
+    $("#add-movie-btn").click(function(e){
+        e.preventDefault();
+
+    })
+
+    // Edit Screen Functionality
+    $(".edit").click(function (e) {
+        e.preventDefault();
+
+    });
+
+    // Delete Screen Functionality
+    $(".delete").click(function (e) {
+        e.preventDefault();
+
+    });
+
+    // Search Movie Functionality
+
+
+    //Sort Movie Functionality
 
 
 
+    function addMovie () {
 
+    };
 
+    function editMovie () {
 
+    };
 
+    function deleteMovie () {
+
+    };
+
+    function searchMovies () {
+
+    };
+
+    function sortMovies () {
+
+    };
 
 });
 
