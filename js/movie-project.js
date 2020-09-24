@@ -10,16 +10,12 @@ $(document).ready(function () {
 
     $(window).load(function () {
         $('#loading-message').hide();
-        // fetch(url).then(response => response.json())
-        //     .then(data => {
-        // console.log(data);
         loadMovies();
     });
 
 
 // Add Screen Functionality Event Listener
     $(document).on("click", "#add-movie-btn", function (e) {
-        // $("#add-movie-btn").click(function (e) {
         e.preventDefault();
         let title = $('#movie-title-add').val();
         let rating = $("input[name='movie-rating-add']:checked").val();
@@ -50,9 +46,9 @@ $(document).ready(function () {
     });
 
 
-// Edit Screen Functionality --> Still working on this, we need to have it come up as popup and live/update/refresh the page
+// Edit Screen Functionality --> still working on popup screen
 
-//EDIT SCREEN IS HIDDEN INITIALLY -->Still working on this
+//EDIT SCREEN IS HIDDEN INITIALLY
     $("#edit-screen").hide();
 
 //EDIT BUTTON FUNCTION Event Listener
@@ -61,17 +57,7 @@ $(document).ready(function () {
         $("#edit-screen").slideToggle().css("display", "flex");
         let editID = $(this).data("id");
         editLoadMovie(editID);
-
-        // $("#edit-screen").css("display", "block");
-
     });
-
-//EDIT MOVIE INFO BUTTON FUNCTIONALITY
-// $(document).on("click", "#edit-movie-btn", function (e) {
-//     e.preventDefault();
-//     let editID = $().data("id");
-//     editMovie(editID);
-// });
 
 
 // Delete Screen Functionality --> This is working, however, we need it to add an alert box warning the user and to live update/refresh
@@ -88,7 +74,7 @@ $(document).ready(function () {
 //Sort Movie Functionality Event Listener
 
 
-///////////////FUNCTIONS BELOW ////////////////////////////
+/////////////// FUNCTIONS BELOW ////////////////////////////
 
     function loadMovies() {
         fetch(url).then(response => response.json())
@@ -131,9 +117,6 @@ $(document).ready(function () {
 
                 let selectedMovie = [];
 
-                //REFRESHING THE EDIT-DISPLAY ELEMENT BEFORE EACH ITERATION
-                // $("#edit-screen").empty();
-
                 //ITERATION OF MOVIE INFORMATION
                 data.forEach(function (movie) {
                     let id = movie.id;
@@ -141,12 +124,6 @@ $(document).ready(function () {
                     if (editID === id) {
                         selectedMovie.push(movie);
                     }
-
-                    //PRELOADING THE DATA INTO THE EDIT FORM
-                    // $("#edit-screen").load(function () {
-                    //     $("#movie-title-edit").val(title);
-                    //     $("#movie-rating-edit").val(rating);
-                    // });
                 });
 
                 selectedMovie.forEach(function (movie) {
@@ -157,17 +134,14 @@ $(document).ready(function () {
 
                     $("#movie-title-edit").val(title);
                     $("input:radio[name='movie-rating-edit'][value=" + rating + "]").prop("checked", true);
-                    // $("#movie-rating-edit").val(rating);
                     $("#movie-genre-edit").val(genre);
 
                 });
+
                 $(document).on("click", "#edit-movie-btn", function (e) {
                     e.preventDefault();
-
-                    // let editID = $().data("id");
                     editMovie(editID);
                 });
-
             });
     };
 
@@ -207,27 +181,6 @@ $(document).ready(function () {
             });
 
     };
-
-// let putURL = `${url}/${editID}`;
-//
-// const editObj = {
-//     "movieTitle": editTitle,
-//     "movieRating": editRating,
-//     "movieGenre": editGenre
-// };
-// const options = {
-//     "method": "PUT",
-//     "headers": {
-//         "Content-Type": "application/json"
-//     },
-//     "body": JSON.stringify(editObj),
-// };
-//
-// fetch(putURL, options)
-//     .then(function(response){response.json()})
-//     .then(function(data){console.log(data)})
-//     .catch(function(error){console.log(error)});
-
 
     function deleteMovie(deleteID) {
         const deleteMethod = {
