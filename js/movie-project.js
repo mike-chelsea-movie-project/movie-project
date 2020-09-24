@@ -11,7 +11,7 @@ $(document).ready(function () {
         $('#loading-message').hide();
         fetch(url).then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 let html = "";
 
                 //REFRESHING THE MAIN-DISPLAY ELEMENT BEFORE EACH ITERATION
@@ -75,17 +75,19 @@ $(document).ready(function () {
         e.preventDefault();
         $("#edit-screen").slideToggle().css("display", "flex");
         let editID = $(this).data("id");
+        console.log(editID);
         editLoadMovie(editID);
+
         // $("#edit-screen").css("display", "block");
 
     });
 
     //EDIT MOVIE INFO BUTTON FUNCTIONALITY
-    $(document).on("click", "#edit-movie-btn", function (e) {
-        e.preventDefault();
-        let editID = $().data("id");
-        editMovie(editID);
-    });
+    // $(document).on("click", "#edit-movie-btn", function (e) {
+    //     e.preventDefault();
+    //     let editID = $().data("id");
+    //     editMovie(editID);
+    // });
 
 
     // Delete Screen Functionality --> This is working, however, we need it to add an alert box warning the user and to live update/refresh
@@ -109,6 +111,8 @@ $(document).ready(function () {
         fetch(url).then(response => response.json())
             .then(data => {
                 console.log(data);
+                console.log(editID);
+
                 let selectedMovie = [];
 
                 //REFRESHING THE EDIT-DISPLAY ELEMENT BEFORE EACH ITERATION
@@ -139,23 +143,31 @@ $(document).ready(function () {
                     $("#movie-genre-edit").val(genre);
 
                 });
+                $(document).on("click", "#edit-movie-btn", function (e) {
+                    e.preventDefault();
+                    console.log(editID);
+
+                    // let editID = $().data("id");
+                    editMovie(editID);
+                });
 
             });
     };
 
     function editMovie(editID) {
+        console.log(editID);
+
         let editTitle = $("#movie-title-edit").val().trim();
         let editRating = $("input[name='movie-rating-edit']:checked").val();
         let editGenre = $("#movie-genre-edit").val();
-
 
         //ADDING THE EDIT INFORMATION
         let putURL = `${url}/${editID}`;
 
         const editObj = {
-            "movieTitle": editTitle,
-            "movieRating": editRating,
-            "movieGenre": editGenre
+            "title": editTitle,
+            "rating": editRating,
+            "genre": editGenre
         };
         const options = {
             "method": "PUT",
@@ -169,7 +181,7 @@ $(document).ready(function () {
             .then(function (response) {
                 response.json()
             })
-            // .then(function(data){console.log(data)})
+            .then(function(data){console.log(data)})
             .catch(function (error) {
                 console.log(error)
             });
