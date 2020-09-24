@@ -75,7 +75,6 @@ $(document).ready(function () {
         e.preventDefault();
         $("#edit-screen").slideToggle().css("display", "flex");
         let editID = $(this).data("id");
-        console.log(editID);
         editLoadMovie(editID);
 
         // $("#edit-screen").css("display", "block");
@@ -111,7 +110,6 @@ $(document).ready(function () {
         fetch(url).then(response => response.json())
             .then(data => {
                 console.log(data);
-                console.log(editID);
 
                 let selectedMovie = [];
 
@@ -135,17 +133,18 @@ $(document).ready(function () {
 
                 selectedMovie.forEach(function (movie) {
                     let title = movie.title;
-                    let rating = movie.rating;
+                    let rating = (movie.rating).toString();
                     let genre = movie.genre;
+                    console.log(rating);
 
                     $("#movie-title-edit").val(title);
-                    $("#movie-rating-edit").val(rating);
+                    $("input:radio[name='movie-rating-edit'][value="+rating+"]").prop("checked", true);
+                    // $("#movie-rating-edit").val(rating);
                     $("#movie-genre-edit").val(genre);
 
                 });
                 $(document).on("click", "#edit-movie-btn", function (e) {
                     e.preventDefault();
-                    console.log(editID);
 
                     // let editID = $().data("id");
                     editMovie(editID);
