@@ -68,13 +68,14 @@ $(document).ready(function () {
     // Edit Screen Functionality --> Still working on this, we need to have it come up as popup and live/update/refresh the page
 
     //EDIT SCREEN IS HIDDEN INITIALLY -->Still working on this
-    // $("#edit-screen").hide();
+    $("#edit-screen").hide();
 
     //EDIT BUTTON FUNCTION
     $(document).on("click", ".edit", function (e) {
         e.preventDefault();
         $("#edit-screen").slideToggle().css("display", "flex");
-        editLoadMovie();
+        let editID = $(this).data("id");
+        editLoadMovie(editID);
         // $("#edit-screen").css("display", "block");
 
     });
@@ -104,26 +105,42 @@ $(document).ready(function () {
 
     };
 
-    function editLoadMovie() {
+    function editLoadMovie(editID) {
         fetch(url).then(response => response.json())
             .then(data => {
                 console.log(data);
+                let selectedMovie = [];
 
                 //REFRESHING THE EDIT-DISPLAY ELEMENT BEFORE EACH ITERATION
                 // $("#edit-screen").empty();
 
                 //ITERATION OF MOVIE INFORMATION
                 data.forEach(function (movie) {
-                    let title = movie.title;
-                    let rating = movie.rating;
+                    let id = movie.id;
+
+                    if(editID === id) {
+                        selectedMovie.push(movie);
+                    }
 
                     //PRELOADING THE DATA INTO THE EDIT FORM
-                    $("#edit-screen").load(function () {
-                        $("#movie-title-edit").val(title);
-                        $("#movie-rating-edit").val(rating);
-                    });
+                    // $("#edit-screen").load(function () {
+                    //     $("#movie-title-edit").val(title);
+                    //     $("#movie-rating-edit").val(rating);
+                    // });
                 });
-            })
+
+                selectedMovie.forEach(function (movie) {
+                    let title = movie.title;
+                    let rating = movie.rating;
+                    let genre = movie.genre;
+
+                    $("#movie-title-edit").val(title);
+                    $("#movie-rating-edit").val(rating);
+                    $("#movie-genre-edit").val(genre);
+
+                });
+
+            });
     };
 
     function editMovie(editID) {
