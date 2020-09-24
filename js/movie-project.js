@@ -199,7 +199,8 @@ $(document).ready(function () {
                 response.json()
             })
             .then(function (data) {
-                console.log(data)
+                console.log(data);
+                loadMovies()
             })
             .catch(function (error) {
                 console.log(error)
@@ -242,7 +243,10 @@ $(document).ready(function () {
             .then(function (response) {
                 response.json()
             })
-            // .then(function(data){console.log(data)})
+            .then(function (data) {
+                console.log(data);
+                loadMovies()
+            })
             .catch(function (error) {
                 console.log(error)
             });
