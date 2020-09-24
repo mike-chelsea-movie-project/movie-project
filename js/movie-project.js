@@ -91,14 +91,15 @@ $(document).ready(function () {
                     let rating = movie.rating;
                     let genre = movie.genre;
 
-                    html += `<p>ID: ${id}</p>` +
-                        `<p>Movie Title: ${title}</p>` +
-                        `<p>Movie Rating: ${rating}</p>` +
-                        `<p>Movie Genre: ${genre}</p>` +
-                        `<button class="delete" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
-                        `<span>Delete </span>` +
-                        `<button class="edit" data-id="${id}" ><i class="far fa-edit"></i></button>` +
-                        `<span>Edit </span>`
+                    html += `<div class="card" style="width: 18rem;">` +
+                        `<div class="card-body">`+
+                        `<h5 class="card-title">${title}</h5>` +
+                        `<h6 class="card-subtitle mb-2 text-muted">${genre}</h6>` +
+                        `<p class="card-text">Rating: ${rating}</p>` +
+                        `<button class="delete btn btn-danger" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
+                        `<button class="edit btn btn-primary" data-id="${id}" ><i class="far fa-edit"></i></button>` +
+                        `</div>` +
+                        `</div>`
                 })
 
                 $("#main-display").append(html);
