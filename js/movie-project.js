@@ -40,14 +40,13 @@ $(document).ready(function () {
     });
 
 
-
-
     // Add Screen Functionality
-    $("#add-movie-btn").click(function(e){
+    $("#add-movie-btn").click(function (e) {
         e.preventDefault();
         let title = $('#movie-title-add').val();
         let rating = $("input[name='movie-rating-add']:checked").val();
-        let genre = $("#movie-genre-add").val();;
+        let genre = $("#movie-genre-add").val();
+        ;
         // POST DATA TO MOVIE API
         const movieRating = {
             title: title,
@@ -64,24 +63,32 @@ $(document).ready(function () {
         fetch(url, options)
             .then(response => console.log(response))
             .catch(error => console.error(error));
-    })
+    });
 
     // Edit Screen Functionality --> Still working on this, we need to have it come up as popup and live/update/refresh the page
 
-        //EDIT SCREEN IS HIDDEN INITIALLY -->Still working on this
-        // $("#edit-screen").hide();
+    //EDIT SCREEN IS HIDDEN INITIALLY -->Still working on this
+    // $("#edit-screen").hide();
 
-        //EDIT FUNCTION
-        $(document).on("click", ".edit", function(e){
-            e.preventDefault();
-            // $("#edit-screen").show();
-            // $("#edit-screen").css("display", "block");
-            let editID = $(this).data("id");
-            editMovie(editID);
-        });
+    //EDIT BUTTON FUNCTION
+    $(document).on("click", ".edit", function (e) {
+        e.preventDefault();
+        $("#edit-screen").slideToggle().css("display", "flex");
+        editLoadMovie();
+        // $("#edit-screen").css("display", "block");
+
+    });
+
+    //EDIT MOVIE INFO BUTTON FUNCTIONALITY
+    $(document).on("click", "#edit-movie-btn", function (e) {
+        e.preventDefault();
+        let editID = $().data("id");
+        editMovie(editID);
+    });
+
 
     // Delete Screen Functionality --> This is working, however, we need it to add an alert box warning the user and to live update/refresh
-    $(document).on("click", ".delete", function(e){
+    $(document).on("click", ".delete", function (e) {
         e.preventDefault();
         let deleteID = $(this).data("id");
         deleteMovie(deleteID);
@@ -93,22 +100,17 @@ $(document).ready(function () {
     //Sort Movie Functionality
 
 
-
-    function addMovie () {
+    function addMovie() {
 
     };
 
-    function editMovie (editID) {
-        let editTitle = $("#movie-title-edit").val().trim();
-        let editRating = $("input[name='movie-rating-edit']:checked").val();
-        let editGenre = $("#movie-genre-edit").val();
-
+    function editLoadMovie() {
         fetch(url).then(response => response.json())
             .then(data => {
                 console.log(data);
 
                 //REFRESHING THE EDIT-DISPLAY ELEMENT BEFORE EACH ITERATION
-                $("#edit-screen").empty();
+                // $("#edit-screen").empty();
 
                 //ITERATION OF MOVIE INFORMATION
                 data.forEach(function (movie) {
@@ -119,75 +121,91 @@ $(document).ready(function () {
                     $("#edit-screen").load(function () {
                         $("#movie-title-edit").val(title);
                         $("#movie-rating-edit").val(rating);
-                    })
+                    });
                 });
-
-                //ADDING THE EDIT INFORMATION
-                let putURL = `${url}/${editID}`;
-
-                const editObj = {
-                    "movieTitle": editTitle,
-                    "movieRating": editRating,
-                    "movieGenre": editGenre
-                };
-                const options = {
-                    "method": "PUT",
-                    "headers": {
-                        "Content-Type": "application/json"
-                    },
-                    "body": JSON.stringify(editObj),
-                };
-
-                fetch(putURL, options)
-                    .then(function(response){response.json()})
-                    // .then(function(data){console.log(data)})
-                    .catch(function(error){console.log(error)});
-
-            });
-
-        // let putURL = `${url}/${editID}`;
-        //
-        // const editObj = {
-        //     "movieTitle": editTitle,
-        //     "movieRating": editRating,
-        //     "movieGenre": editGenre
-        // };
-        // const options = {
-        //     "method": "PUT",
-        //     "headers": {
-        //         "Content-Type": "application/json"
-        //     },
-        //     "body": JSON.stringify(editObj),
-        // };
-        //
-        // fetch(putURL, options)
-        //     .then(function(response){response.json()})
-        //     .then(function(data){console.log(data)})
-        //     .catch(function(error){console.log(error)});
+            })
     };
 
-    function deleteMovie (deleteID) {
-        const deleteMethod = {
-            "method": "DELETE",
+    function editMovie(editID) {
+        let editTitle = $("#movie-title-edit").val().trim();
+        let editRating = $("input[name='movie-rating-edit']:checked").val();
+        let editGenre = $("#movie-genre-edit").val();
+
+
+        //ADDING THE EDIT INFORMATION
+        let putURL = `${url}/${editID}`;
+
+        const editObj = {
+            "movieTitle": editTitle,
+            "movieRating": editRating,
+            "movieGenre": editGenre
+        };
+        const options = {
+            "method": "PUT",
             "headers": {
                 "Content-Type": "application/json"
             },
-            //Doesn't need to have a body since nothing is being sent to the server
+            "body": JSON.stringify(editObj),
         };
-        const deleteURL = `${url}/${deleteID}`;
 
-        fetch(deleteURL, deleteMethod)
-            .then(function (response){response.json()})
+        fetch(putURL, options)
+            .then(function (response) {
+                response.json()
+            })
             // .then(function(data){console.log(data)})
-            .catch(function(error){console.log(error)});
-    };
-
-    function searchMovies () {
-
-    };
-
-    function sortMovies () {
+            .catch(function (error) {
+                console.log(error)
+            });
 
     };
+
+    // let putURL = `${url}/${editID}`;
+    //
+    // const editObj = {
+    //     "movieTitle": editTitle,
+    //     "movieRating": editRating,
+    //     "movieGenre": editGenre
+    // };
+    // const options = {
+    //     "method": "PUT",
+    //     "headers": {
+    //         "Content-Type": "application/json"
+    //     },
+    //     "body": JSON.stringify(editObj),
+    // };
+    //
+    // fetch(putURL, options)
+    //     .then(function(response){response.json()})
+    //     .then(function(data){console.log(data)})
+    //     .catch(function(error){console.log(error)});
+
+
+function deleteMovie(deleteID) {
+    const deleteMethod = {
+        "method": "DELETE",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        //Doesn't need to have a body since nothing is being sent to the server
+    };
+    const deleteURL = `${url}/${deleteID}`;
+
+    fetch(deleteURL, deleteMethod)
+        .then(function (response) {
+            response.json()
+        })
+        // .then(function(data){console.log(data)})
+        .catch(function (error) {
+            console.log(error)
+        });
+};
+
+function searchMovies() {
+
+};
+
+function sortMovies() {
+
+};
 
 });
