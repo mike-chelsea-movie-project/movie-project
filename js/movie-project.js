@@ -3,6 +3,7 @@ $(document).ready(function () {
 
     const url = "https://fearless-famous-glass.glitch.me/movies";
 
+    //Loading Message when page loads and before the data/movies load in
     let msg = "<h1>Loading...</h1>";
 
     $('#loading-message').html(msg);
@@ -12,41 +13,18 @@ $(document).ready(function () {
         fetch(url).then(response => response.json())
             .then(data => {
                 // console.log(data);
-                let html = "";
-
-                //REFRESHING THE MAIN-DISPLAY ELEMENT BEFORE EACH ITERATION
-                $("#main-display").empty();
-
-                //ITERATION OF MOVIE INFORMATION
-                data.forEach(function (movie) {
-                    let id = movie.id;
-                    let title = movie.title;
-                    let rating = movie.rating;
-                    let genre = movie.genre;
-
-                    html += `<p>ID: ${id}</p>` +
-                        `<p>Movie Title: ${title}</p>` +
-                        `<p>Movie Rating: ${rating}</p>` +
-                        `<p>Movie Genre: ${genre}</p>` +
-                        `<button class="delete" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
-                        `<span>Delete </span>` +
-                        `<button class="edit" data-id="${id}" ><i class="far fa-edit"></i></button>` +
-                        `<span>Edit </span>`
-                })
-
-                $("#main-display").append(html);
-
-            })
+                loadMovies(data);
+            });
     });
 
 
-    // Add Screen Functionality
+    // Add Screen Functionality Event Listener
     $("#add-movie-btn").click(function (e) {
         e.preventDefault();
         let title = $('#movie-title-add').val();
         let rating = $("input[name='movie-rating-add']:checked").val();
         let genre = $("#movie-genre-add").val();
-        ;
+
         // POST DATA TO MOVIE API
         const movieRating = {
             title: title,
@@ -61,7 +39,8 @@ $(document).ready(function () {
             body: JSON.stringify(movieRating),
         };
         fetch(url, options)
-            .then(response => console.log(response))
+            .then(response => response.json())
+            .then(data => console.log(data)) //this is where we left off b4 lunch
             .catch(error => console.error(error));
     });
 
@@ -70,7 +49,7 @@ $(document).ready(function () {
     //EDIT SCREEN IS HIDDEN INITIALLY -->Still working on this
     $("#edit-screen").hide();
 
-    //EDIT BUTTON FUNCTION
+    //EDIT BUTTON FUNCTION Event Listener
     $(document).on("click", ".edit", function (e) {
         e.preventDefault();
         $("#edit-screen").slideToggle().css("display", "flex");
@@ -96,10 +75,40 @@ $(document).ready(function () {
         deleteMovie(deleteID);
     });
 
-    // Search Movie Functionality
+    // Search Movie Functionality Event Listener
 
 
-    //Sort Movie Functionality
+    //Sort Movie Functionality Event Listener
+
+
+
+    ///////////////FUNCTIONS BELOW ////////////////////////////
+
+    function loadMovies (data) {
+        let html = "";
+
+        //REFRESHING THE MAIN-DISPLAY ELEMENT BEFORE EACH ITERATION
+        $("#main-display").empty();
+
+        //ITERATION OF MOVIE INFORMATION
+        data.forEach(function (movie) {
+            let id = movie.id;
+            let title = movie.title;
+            let rating = movie.rating;
+            let genre = movie.genre;
+
+            html += `<p>ID: ${id}</p>` +
+                `<p>Movie Title: ${title}</p>` +
+                `<p>Movie Rating: ${rating}</p>` +
+                `<p>Movie Genre: ${genre}</p>` +
+                `<button class="delete" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
+                `<span>Delete </span>` +
+                `<button class="edit" data-id="${id}" ><i class="far fa-edit"></i></button>` +
+                `<span>Edit </span>`
+        })
+
+        $("#main-display").append(html);
+    };
 
 
     function addMovie() {
