@@ -22,10 +22,12 @@ $(document).ready(function () {
                     let id = movie.id;
                     let title = movie.title;
                     let rating = movie.rating;
+                    let genre = movie.genre;
 
                     html += `<p>ID: ${id}</p>` +
                         `<p>Movie Title: ${title}</p>` +
                         `<p>Movie Rating: ${rating}</p>` +
+                        `<p>Movie Genre: ${genre}</p>` +
                         `<button class="delete" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
                         `<span>Delete </span>` +
                         `<button class="edit" data-id="${id}" ><i class="far fa-edit"></i></button>` +
@@ -45,7 +47,7 @@ $(document).ready(function () {
         e.preventDefault();
         let title = $('#movie-title-add').val();
         let rating = $("input[name='movie-rating-add']:checked").val();
-        let genre = $("input[name='movie-genre']:checked").val();
+        let genre = $("#movie-genre-add").val();;
         // POST DATA TO MOVIE API
         const movieRating = {
             title: title,
