@@ -76,9 +76,26 @@ $(document).ready(function () {
 
 /////////////// FUNCTIONS BELOW ////////////////////////////
 
+    let searchParam = $('#search-movie').keyup(function () {
+        loadMovies()
+    })
+
     function loadMovies() {
         fetch(url).then(response => response.json())
             .then(data => {
+                if (searchParam.val() !== "") {
+                    let searchData = [];
+                    for (let x = 0; x < data.length; x++) {
+                        if (data[x].title.toUpperCase().includes(searchParam.val().toUpperCase())) {
+                            searchData.push(data[x]);
+                            console.log(searchData);
+                        }
+
+                    }
+                    data = searchData;
+                }
+
+
                 let html = "";
 
                 //REFRESHING THE MAIN-DISPLAY ELEMENT BEFORE EACH ITERATION
@@ -90,12 +107,16 @@ $(document).ready(function () {
                     let title = movie.title;
                     let rating = movie.rating;
                     let genre = movie.genre;
+                    let ratingString = "";
+                    for (let i = 0; i < rating; i++) {
+                        ratingString += "<i class='fas fa-star'></i>";
+                    }
 
                     html += `<div class="card" style="width: 18rem;">` +
-                        `<div class="card-body">`+
-                        `<h5 class="card-title">${title}</h5>` +
-                        `<h6 class="card-subtitle mb-2 text-muted">${genre}</h6>` +
-                        `<p class="card-text">Rating: ${rating}</p>` +
+                        `<div class="card-body">` +
+                        `<h5 class="title card-title">${title}</h5>` +
+                        `<h6 class="genre card-subtitle mb-2 text-muted">${genre}</h6>` +
+                        `<p class="rating card-text">Rating: ${ratingString}</p>` +
                         `<button class="delete btn btn-danger" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
                         `<button class="edit btn btn-primary" data-id="${id}" ><i class="far fa-edit"></i></button>` +
                         `</div>` +
@@ -206,13 +227,17 @@ $(document).ready(function () {
             });
     };
 
+
     function searchMovies() {
+
 
     };
 
     function sortMovies() {
 
     };
+
+
 });
 
 
