@@ -23,9 +23,27 @@
 <!--Sort Movies-->
 <div id="sort-div">
     <h3>Sorting Results</h3>
-    <p>Sort via Movie Titles: </p>
     <p>Sort via Ratings: </p>
+    <select id="movie-rating-sort" name="movie-rating-sort">
+        <option selected value="all">All</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
     <p>Sort via Genres: </p>
+    <select id="movie-genre-sort" name="movie-genre-sort">
+        <option selected value="all">All</option>
+        <option value="Action">Action</option>
+        <option value="Comedy">Comedy</option>
+        <option value="Drama">Drama</option>
+        <option value="Fantasy">Fantasy</option>
+        <option value="Horror">Horror</option>
+        <option value="Sci-Fi">Science Fiction</option>
+        <option value="Animation">Animation</option>
+        <option value="Western">Western</option>
+    </select>
 </div>
 
 <hr>
@@ -52,17 +70,18 @@
         <label for="five">
             <input id="five" type="radio" name="movie-rating-add" value="5"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
         </label>
+        <br>
         <label for="movie-genre-add"><h3>Genres: </h3></label>
         <select id="movie-genre-add" name="movie-genre">
             <option disabled selected value>Select Genre</option>
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="drama">Drama</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="horror">Horror</option>
-            <option value="sci-fi">Science Fiction</option>
-            <option value="animation">Animation</option>
-            <option value="western">Western</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Horror">Horror</option>
+            <option value="Sci-Fi">Science Fiction</option>
+            <option value="Animation">Animation</option>
+            <option value="Western">Western</option>
         </select>
         <button id="add-movie-btn">Add Movie</button>
     </form>
@@ -95,14 +114,14 @@
         <label for="movie-genre-edit"><h3>Genres: </h3></label>
         <select id="movie-genre-edit" name="movie-genre">
             <option disabled selected value>Select Genre</option>
-            <option value="action">Action</option>
-            <option value="comedy">Comedy</option>
-            <option value="drama">Drama</option>
-            <option value="fantasy">Fantasy</option>
-            <option value="horror">Horror</option>
-            <option value="sci-fi">Science Fiction</option>
-            <option value="animation">Animation</option>
-            <option value="western">Western</option>
+            <option value="Action">Action</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Drama">Drama</option>
+            <option value="Fantasy">Fantasy</option>
+            <option value="Horror">Horror</option>
+            <option value="Sci-Fi">Science Fiction</option>
+            <option value="Animation">Animation</option>
+            <option value="Western">Western</option>
         </select>
         <button id="edit-movie-btn">Edit Movie</button>
 
