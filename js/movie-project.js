@@ -186,11 +186,14 @@ $(document).ready(function () {
                     }
                 });
 
+                console.log(selectedMovie)
+
                 selectedMovie.forEach(function (movie) {
                     let title = movie.title;
                     let rating = (movie.rating).toString();
-                    let genre = movie.genre;
+                    let genre = (movie.genre).toUpperCase();
                     console.log(rating);
+                    console.log(genre)
 
                     $("#movie-title-edit").val(title);
                     $("input:radio[name='movie-rating-edit'][value=" + rating + "]").prop("checked", true);
