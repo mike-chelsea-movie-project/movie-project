@@ -90,12 +90,16 @@ $(document).ready(function () {
                     let title = movie.title;
                     let rating = movie.rating;
                     let genre = movie.genre;
+                    let ratingString = "";
+                    for (let i = 0; i < rating; i++) {
+                        ratingString += "<i class='fas fa-star'></i>";
+                    }
 
                     html += `<div class="card" style="width: 18rem;">` +
                         `<div class="card-body">`+
                         `<h5 class="card-title">${title}</h5>` +
                         `<h6 class="card-subtitle mb-2 text-muted">${genre}</h6>` +
-                        `<p class="card-text">Rating: ${rating}</p>` +
+                        `<p class="card-text">Rating: ${ratingString}</p>` +
                         `<button class="delete btn btn-danger" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
                         `<button class="edit btn btn-primary" data-id="${id}" ><i class="far fa-edit"></i></button>` +
                         `</div>` +
