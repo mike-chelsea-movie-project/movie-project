@@ -17,32 +17,8 @@ $(document).ready(function () {
 // Add Screen Functionality Event Listener
     $(document).on("click", "#add-movie-btn", function (e) {
         e.preventDefault();
-        let title = $('#movie-title-add').val();
-        let rating = $("input[name='movie-rating-add']:checked").val();
-        let genre = $("#movie-genre-add").val();
 
-        // POST DATA TO MOVIE API
-        const movieRating = {
-            title: title,
-            rating: rating,
-            genre: genre
-        };
-        const options = {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(movieRating),
-        };
-        fetch(url, options)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                loadMovies()
-            })
-            .catch(error => console.error(error));
-
-
+        addMovie();
     });
 
 
@@ -69,20 +45,34 @@ $(document).ready(function () {
     });
 
 // Search Movie Functionality Event Listener
-
+    let searchParam = $('#search-movie').keyup(function () {
+        loadMovies();
+    });
 
 //Sort Movie Functionality Event Listener
+    let sortRatingParam = $("#movie-rating-sort").change(function () {
+        loadMovies();
+    });
+    let sortGenreParam = $("#movie-genre-sort").change(function () {
+        loadMovies();
+    });
+
+
 
 
 /////////////// FUNCTIONS BELOW ////////////////////////////
 
-    let searchParam = $('#search-movie').keyup(function () {
-        loadMovies()
-    })
+    console.log("searchParm: ", searchParam)
+    console.log("sorting-rating parameter: ", sortRatingParam);
+    // let sortGenreParam = $("#movie-genre-sort").val();
+    console.log("sorting-genre parameter: ", sortGenreParam);
+
 
     function loadMovies() {
         fetch(url).then(response => response.json())
             .then(data => {
+
+                //SEARCH FUNCTIONALITY
                 if (searchParam.val() !== "") {
                     let searchData = [];
                     for (let x = 0; x < data.length; x++) {
@@ -95,6 +85,31 @@ $(document).ready(function () {
                     data = searchData;
                 }
 
+                ////////////////SORTING FUNCTIONALITY////////////
+
+                // SORTING BY RATINGS //
+                if (sortRatingParam.val() !== "all") {
+                    let sortingRatingData = [];
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].rating.toString() === sortRatingParam.val()) {
+                            sortingRatingData.push(data[i])
+                            console.log(sortingRatingData)
+                        }
+                    }
+                    data = sortingRatingData
+                }
+
+                // SORTING BY GENRE //
+                if (sortGenreParam.val() !== "all") {
+                    let sortingGenreData = [];
+                    for (let i = 0; i < data.length; i++) {
+                        if (data[i].genre.toUpperCase().includes(sortGenreParam.val().toUpperCase())) {
+                            sortingGenreData.push(data[i])
+                            console.log(sortingGenreData);
+                        }
+                    }
+                    data = sortingGenreData;
+                }
 
                 let html = "";
 
@@ -116,7 +131,7 @@ $(document).ready(function () {
                         `<div class="card-body">` +
                         `<h5 class="title card-title">${title}</h5>` +
                         `<h6 class="genre card-subtitle mb-2 text-muted">${genre}</h6>` +
-                        `<p class="rating card-text">Rating: ${ratingString}</p>` +
+                        `<p class="rating card-text">Rating: ${ratingString} </p>` +
                         `<button class="delete btn btn-danger" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
                         `<button class="edit btn btn-primary" data-id="${id}" ><i class="far fa-edit"></i></button>` +
                         `</div>` +
@@ -129,7 +144,30 @@ $(document).ready(function () {
 
 
     function addMovie() {
+        let title = $('#movie-title-add').val();
+        let rating = $("input[name='movie-rating-add']:checked").val();
+        let genre = $("#movie-genre-add").val();
 
+        // POST DATA TO MOVIE API
+        const movieRating = {
+            title: title,
+            rating: rating,
+            genre: genre
+        };
+        const options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(movieRating),
+        };
+        fetch(url, options)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                loadMovies()
+            })
+            .catch(error => console.error(error));
     };
 
     function editLoadMovie(editID) {
@@ -148,11 +186,14 @@ $(document).ready(function () {
                     }
                 });
 
+                console.log(selectedMovie)
+
                 selectedMovie.forEach(function (movie) {
                     let title = movie.title;
                     let rating = (movie.rating).toString();
-                    let genre = movie.genre;
+                    let genre = (movie.genre).toUpperCase();
                     console.log(rating);
+                    console.log(genre)
 
                     $("#movie-title-edit").val(title);
                     $("input:radio[name='movie-rating-edit'][value=" + rating + "]").prop("checked", true);
@@ -228,14 +269,49 @@ $(document).ready(function () {
     };
 
 
-    function searchMovies() {
+    // function searchMovies(data) {
+    //     if (searchParam.val() !== "") {
+    //         let searchData = [];
+    //         for (let x = 0; x < data.length; x++) {
+    //             if (data[x].title.toUpperCase().includes(searchParam.val().toUpperCase())) {
+    //                 searchData.push(data[x]);
+    //                 console.log(searchData);
+    //             }
+    //
+    //         }
+    //         data = searchData;
+    //     }
+    // };
 
+    // function sortRating(data) {
+    //     console.log(data);
+    //     console.log(sortRatingParam.val())
+    //     if (sortRatingParam.val() !== "all") {
+    //         let sortingRatingData = [];
+    //         for (let i = 0; i < data.length; i++) {
+    //             if (data[i].rating.toString() === sortRatingParam.val()) {
+    //                 sortingRatingData.push(data[i])
+    //                 console.log(sortingRatingData)
+    //             }
+    //         }
+    //         data = sortingRatingData
+    //     }
+    // }
 
-    };
-
-    function sortMovies() {
-
-    };
+    // function sortGenre(data) {
+    //     console.log(data);
+    //     if (sortGenreParam.val() !== "all") {
+    //         let sortingGenreData = [];
+    //         for (let i = 0; i < data.length; i++) {
+    //             if (data[i].genre.toUpperCase().includes(sortGenreParam.val().toUpperCase())) {
+    //                 sortingGenreData.push(data[i])
+    //                 console.log(sortingGenreData);
+    //             }
+    //         }
+    //         data = sortingGenreData;
+    //     }
+    //
+    // }
 
 
 });
