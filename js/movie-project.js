@@ -40,7 +40,10 @@ $(document).ready(function () {
     $(document).on("click", ".delete", function (e) {
         e.preventDefault();
         let deleteID = $(this).data("id");
-        deleteMovie(deleteID);
+        let userResponse = confirm("Are you sure you want to Delete this movie?");
+        if(userResponse){
+            deleteMovie(deleteID);
+        }
         loadMovies();
     });
 
@@ -70,6 +73,20 @@ $(document).ready(function () {
 
         $("#sort-span").toggle(effect, options, duration);
     });
+
+    //ADD BUTTON
+    $(document).on("click", "#add-btn", function(e){
+        // Set the effect type
+        var effect = 'slide';
+
+        // Set the options for the effect type chosen
+        var options = { direction: 'up' };
+
+        // Set the duration (default: 400 milliseconds)
+        var duration = 700;
+
+        $("#add-movie").toggle(effect, options, duration);
+    })
 
 /////////////// FUNCTIONS BELOW ////////////////////////////
 

@@ -136,13 +136,15 @@ body {
     display: none;
 }
 
-#sort-btn {
+#sort-btn, #add-btn {
     width: 80px;
     height: 80px;
     border-radius: 50%;
     font-size: 2em;
     background-color: #D9A23D;
+    box-shadow: 0 0 25px 0 rgba(0, 0, 0, 0.4);
+    color: #ffffff;
 }
-#sort-btn:hover {
+#sort-btn:hover, #add-btn:hover {
     filter: invert(100%);
 }
