@@ -149,10 +149,37 @@ $(document).ready(function () {
                         ratingString += "<i class='fas fa-star'></i>";
                     }
 
-                    html += `<div class="card m-3" style="width: 18rem;">` +
-                        `<div class="card-body">` +
+                    html += `<div class="card bg-dark text-white m-3" style="width: 18rem;">`
+
+                    if (genre.toUpperCase() === "ACTION"){
+                        html += `<img class="card-img" src="img/action.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "COMEDY"){
+                        html += `<img class="card-img" src="img/comedy.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "DRAMA"){
+                        html += `<img class="card-img" src="img/drama.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "FANTASY"){
+                        html += `<img class="card-img" src="img/fantasy.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "HORROR"){
+                        html += `<img class="card-img" src="img/horror.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "SCI-FI"){
+                        html += `<img class="card-img" src="img/sci-fi.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "ANIMATION"){
+                        html += `<img class="card-img" src="img/animation.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "WESTERN"){
+                        html += `<img class="card-img" src="img/western.jpg" alt="Card image">`
+                    }
+
+                        html +=
+                        `<div class="card-img-overlay">` +
                         `<h5 class="title card-title">${title}</h5>` +
-                        `<h6 class="genre card-subtitle mb-2 text-muted">${genre}</h6>` +
+                        `<h6 class="genre card-subtitle mb-2">${genre}</h6>` +
                         `<p class="rating card-text">Rating: ${ratingString} </p>` +
                         `<button class="delete btn btn-danger" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
                         `<button class="edit btn btn-primary" data-id="${id}" ><i class="far fa-edit"></i></button>` +
