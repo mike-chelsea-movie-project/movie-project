@@ -57,24 +57,21 @@ $(document).ready(function () {
         loadMovies();
     });
 
-    //Search BAR Toggle//
-    $(".header").on("click", ".search-toggle", function (e) {
-        let selector = $(this).data("selector");
+//Sort Button//
+    $(document).on("click", "#sort-btn", function(e){
+        // Set the effect type
+        var effect = 'slide';
 
-        $(selector).toggleClass("show").find(".search-input").focus();
-        $(this).toggleClass("active");
+        // Set the options for the effect type chosen
+        var options = { direction: 'right' };
 
-        e.preventDefault();
+        // Set the duration (default: 400 milliseconds)
+        var duration = 700;
+
+        $("#sort-span").toggle(effect, options, duration);
     });
 
-
 /////////////// FUNCTIONS BELOW ////////////////////////////
-
-    console.log("searchParm: ", searchParam)
-    console.log("sorting-rating parameter: ", sortRatingParam);
-    // let sortGenreParam = $("#movie-genre-sort").val();
-    console.log("sorting-genre parameter: ", sortGenreParam);
-
 
     function loadMovies() {
         fetch(url).then(response => response.json())
