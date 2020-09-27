@@ -40,7 +40,10 @@ $(document).ready(function () {
     $(document).on("click", ".delete", function (e) {
         e.preventDefault();
         let deleteID = $(this).data("id");
-        deleteMovie(deleteID);
+        let userResponse = confirm("Are you sure you want to DELETE this movie?");
+        if (userResponse) {
+            deleteMovie(deleteID);
+        }
         loadMovies();
     });
 
@@ -57,24 +60,35 @@ $(document).ready(function () {
         loadMovies();
     });
 
-    //Search BAR Toggle//
-    $(".header").on("click", ".search-toggle", function (e) {
-        let selector = $(this).data("selector");
+//Sort Button//
+    $(document).on("click", "#sort-btn", function (e) {
+        // Set the effect type
+        var effect = 'slide';
 
-        $(selector).toggleClass("show").find(".search-input").focus();
-        $(this).toggleClass("active");
+        // Set the options for the effect type chosen
+        var options = {direction: 'right'};
 
-        e.preventDefault();
+        // Set the duration (default: 400 milliseconds)
+        var duration = 700;
+
+        $("#sort-span").toggle(effect, options, duration);
     });
 
+    //ADD BUTTON
+    $(document).on("click", "#add-btn", function (e) {
+        // Set the effect type
+        var effect = 'slide';
+
+        // Set the options for the effect type chosen
+        var options = {direction: 'up'};
+
+        // Set the duration (default: 400 milliseconds)
+        var duration = 700;
+
+        $("#add-movie").toggle(effect, options, duration);
+    })
 
 /////////////// FUNCTIONS BELOW ////////////////////////////
-
-    console.log("searchParm: ", searchParam)
-    console.log("sorting-rating parameter: ", sortRatingParam);
-    // let sortGenreParam = $("#movie-genre-sort").val();
-    console.log("sorting-genre parameter: ", sortGenreParam);
-
 
     function loadMovies() {
         fetch(url).then(response => response.json())
@@ -86,7 +100,7 @@ $(document).ready(function () {
                     for (let x = 0; x < data.length; x++) {
                         if (data[x].title.toUpperCase().includes(searchParam.val().toUpperCase())) {
                             searchData.push(data[x]);
-                            console.log(searchData);
+                            // console.log(searchData);
                         }
 
                     }
@@ -101,7 +115,7 @@ $(document).ready(function () {
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].rating.toString() === sortRatingParam.val()) {
                             sortingRatingData.push(data[i])
-                            console.log(sortingRatingData)
+                            // console.log(sortingRatingData)
                         }
                     }
                     data = sortingRatingData
@@ -113,7 +127,7 @@ $(document).ready(function () {
                     for (let i = 0; i < data.length; i++) {
                         if (data[i].genre.toUpperCase().includes(sortGenreParam.val().toUpperCase())) {
                             sortingGenreData.push(data[i])
-                            console.log(sortingGenreData);
+                            // console.log(sortingGenreData);
                         }
                     }
                     data = sortingGenreData;
@@ -135,10 +149,37 @@ $(document).ready(function () {
                         ratingString += "<i class='fas fa-star'></i>";
                     }
 
-                    html += `<div class="card" style="width: 18rem;">` +
-                        `<div class="card-body">` +
+                    html += `<div class="card bg-dark text-white m-3" style="width: 18rem;">`
+
+                    if (genre.toUpperCase() === "ACTION"){
+                        html += `<img class="card-img" src="img/action.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "COMEDY"){
+                        html += `<img class="card-img" src="img/comedy.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "DRAMA"){
+                        html += `<img class="card-img" src="img/drama.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "FANTASY"){
+                        html += `<img class="card-img" src="img/fantasy.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "HORROR"){
+                        html += `<img class="card-img" src="img/horror.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "SCI-FI"){
+                        html += `<img class="card-img" src="img/sci-fi.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "ANIMATION"){
+                        html += `<img class="card-img" src="img/animation.jpg" alt="Card image">`
+                    }
+                    if (genre.toUpperCase() === "WESTERN"){
+                        html += `<img class="card-img" src="img/western.jpg" alt="Card image">`
+                    }
+
+                        html +=
+                        `<div class="card-img-overlay">` +
                         `<h5 class="title card-title">${title}</h5>` +
-                        `<h6 class="genre card-subtitle mb-2 text-muted">${genre}</h6>` +
+                        `<h6 class="genre card-subtitle mb-2">${genre}</h6>` +
                         `<p class="rating card-text">Rating: ${ratingString} </p>` +
                         `<button class="delete btn btn-danger" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
                         `<button class="edit btn btn-primary" data-id="${id}" ><i class="far fa-edit"></i></button>` +
@@ -172,7 +213,7 @@ $(document).ready(function () {
         fetch(url, options)
             .then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
                 loadMovies()
             })
             .catch(error => console.error(error));
@@ -181,7 +222,7 @@ $(document).ready(function () {
     function editLoadMovie(editID) {
         fetch(url).then(response => response.json())
             .then(data => {
-                console.log(data);
+                // console.log(data);
 
                 let selectedMovie = [];
 
@@ -194,14 +235,14 @@ $(document).ready(function () {
                     }
                 });
 
-                console.log(selectedMovie)
+                // console.log(selectedMovie)
 
                 selectedMovie.forEach(function (movie) {
                     let title = movie.title;
                     let rating = (movie.rating).toString();
                     let genre = (movie.genre).toUpperCase();
-                    console.log(rating);
-                    console.log(genre)
+                    // console.log(rating);
+                    // console.log(genre)
 
                     $("#movie-title-edit").val(title);
                     $("input:radio[name='movie-rating-edit'][value=" + rating + "]").prop("checked", true);
@@ -244,7 +285,7 @@ $(document).ready(function () {
                 response.json()
             })
             .then(function (data) {
-                console.log(data);
+                // console.log(data);
                 loadMovies()
             })
             .catch(function (error) {
@@ -268,7 +309,7 @@ $(document).ready(function () {
                 response.json()
             })
             .then(function (data) {
-                console.log(data);
+                // console.log(data);
                 loadMovies()
             })
             .catch(function (error) {
