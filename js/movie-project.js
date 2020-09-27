@@ -57,7 +57,15 @@ $(document).ready(function () {
         loadMovies();
     });
 
+    //Search BAR Toggle//
+    $(".header").on("click", ".search-toggle", function (e) {
+        let selector = $(this).data("selector");
 
+        $(selector).toggleClass("show").find(".search-input").focus();
+        $(this).toggleClass("active");
+
+        e.preventDefault();
+    });
 
 
 /////////////// FUNCTIONS BELOW ////////////////////////////
