@@ -178,9 +178,9 @@ $(document).ready(function () {
 
                         html +=
                         `<div class="card-img-overlay">` +
-                        `<h5 class="title card-title">${title}</h5>` +
-                        `<h6 class="genre card-subtitle mb-2">${genre}</h6>` +
-                        `<p class="rating card-text">Rating: ${ratingString} </p>` +
+                        `<h5 class="title card-title bg-dark">${title}</h5>` +
+                        `<h6 class="genre card-subtitle mb-2 bg-dark">${genre}</h6>` +
+                        `<p class="rating card-text bg-dark">Rating: ${ratingString} </p>` +
                         `<button class="delete btn btn-danger" data-id="${id}"><i class="fas fa-trash-alt"></i></button>` +
                         `<button class="edit btn btn-primary" data-id="${id}" ><i class="far fa-edit"></i></button>` +
                         `</div>` +
